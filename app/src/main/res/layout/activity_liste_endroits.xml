@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ghassan.miniprojetandroid.ListeEndroits">
+
+    <ListView
+        android:layout_width="371dp"
+        android:layout_height="351dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="152dp"
+        android:id="@+id/listView"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/search"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="116dp"
+        android:layout_height="22dp"
+        android:text="Tags"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="11dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/tags_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rechercher"
+        android:layout_below="@+id/tags_spinner"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
