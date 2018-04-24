@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,32 +54,16 @@ public class InfoEndroit extends AppCompatActivity {
     private EditText mComment;
     private int cmpComment;
     private String idEndroit;
+    private CardView commentAction;
+    private RatingBar mRatingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_endroit);
 
-        database = FirebaseDatabase.getInstance();
-        storage = FirebaseStorage.getInstance();
-
         initComponents();
-
-        Picasso.get().load(getIntent().getExtras().getString("filePath")).fit().centerCrop().into(image_endroit);
-
-        nom.setText(getIntent().getExtras().getString("nom"));
-        adr.setText(getIntent().getExtras().getString("adr"));
-        tag.setText(getIntent().getExtras().getString("tag"));
-        ajoutePar.setText(getIntent().getExtras().getString("userId"));
-
-        idEndroit = (String) getIntent().getExtras().get("idEndroit");
-
-        lat = getIntent().getExtras().getDouble("lat");
-        lng = getIntent().getExtras().getDouble("lng");
-
-        mFireBase = FirebaseDatabase.getInstance();
-        myRef = mFireBase.getReferenceFromUrl("https://miniprojetandroid-3f944.firebaseio.com/Comments/" + idEndroit + "/");
-
+        reInitComponents();
         setListAdapter(myRef);
 
         geolocaliser.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +90,48 @@ public class InfoEndroit extends AppCompatActivity {
             }
         });
 
+        commentAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mComment.getText().toString().equals(""))
+                    Toast.makeText(InfoEndroit.this, "Champ vide !", Toast.LENGTH_SHORT).show();
+                else {
+                    Commentaire nvCommentaire = new Commentaire(
+                            FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
+                            mComment.getText().toString()
+                    );
+
+                    myRef.child("" + (++cmpComment)).setValue(nvCommentaire);
+                    mComment.setText("");
+                    cmpRefComment.setValue(cmpComment);
+                }
+            }
+        });
+
+        mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Toast.makeText(InfoEndroit.this, "your rating is : "  + (int)rating + "/5", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void reInitComponents() {
+        Picasso.get().load(getIntent().getExtras().getString("filePath")).fit().centerCrop().into(image_endroit);
+
+        nom.setText(getIntent().getExtras().getString("nom"));
+        adr.setText(getIntent().getExtras().getString("adr"));
+        tag.setText(getIntent().getExtras().getString("tag"));
+        ajoutePar.setText(getIntent().getExtras().getString("userId"));
+
+        idEndroit = (String) getIntent().getExtras().get("idEndroit");
+
+        lat = getIntent().getExtras().getDouble("lat");
+        lng = getIntent().getExtras().getDouble("lng");
+
+        mFireBase = FirebaseDatabase.getInstance();
+        myRef = mFireBase.getReferenceFromUrl("https://miniprojetandroid-3f944.firebaseio.com/Comments/" + idEndroit + "/");
     }
 
     public void setListAdapter(DatabaseReference ref){
@@ -124,32 +152,13 @@ public class InfoEndroit extends AppCompatActivity {
         };
 
         commentsListView.setAdapter(firebaseListAdapter);
-
-        mComment.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH
-                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
-                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
-
-                    //comment
-                    Commentaire nvCommentaire = new Commentaire(
-                            FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
-                            mComment.getText().toString()
-                    );
-
-                    myRef.child("" + (++cmpComment)).setValue(nvCommentaire);
-                    mComment.setText("");
-                    cmpRefComment.setValue(cmpComment);
-                }
-
-                return false;
-            }
-        });
     }
 
     private void initComponents() {
+
+        database = FirebaseDatabase.getInstance();
+        storage = FirebaseStorage.getInstance();
+
         nom = (TextView)findViewById(R.id.nomEndroit);
         adr = (TextView)findViewById(R.id.adrEndroit);
         tag = (TextView)findViewById(R.id.tagEndroit);
@@ -160,5 +169,8 @@ public class InfoEndroit extends AppCompatActivity {
         mComment = (EditText)findViewById(R.id.input_comment);
 
         cmpRefComment = database.getReference("cmpComment");
+
+        commentAction = (CardView)findViewById(R.id.btnComment);
+        mRatingBar = (RatingBar)findViewById(R.id.ratingBar);
     }
 }

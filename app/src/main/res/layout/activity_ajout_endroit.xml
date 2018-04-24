@@ -1,73 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ghassan.miniprojetandroid.AjoutEndroit">
-
-    <TextView
-        android:id="@+id/nomLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="39dp"
-        android:layout_marginTop="103dp"
-        android:layout_toStartOf="@+id/nomTxt"
-        android:text="Nom" />
-
+    tools:context="com.example.ghassan.miniprojetandroid.AjoutEndroit"
+    android:orientation="vertical"
+    android:gravity="center">
     <EditText
         android:id="@+id/nomTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="19dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_alignTop="@+id/nomLabel"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tagTxt"
-        android:layout_alignBottom="@+id/tagTxt"
-        android:layout_alignStart="@+id/textView8"
-        android:text="Tags" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Adresse"
-        android:layout_alignBaseline="@+id/adrTxt"
-        android:layout_alignBottom="@+id/adrTxt"
-        android:layout_alignEnd="@+id/nomLabel" />
-
-    <Spinner
-        android:id="@+id/tagTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/adrTxt"
-        android:layout_alignEnd="@+id/adrTxt" />
-
+        android:hint="Endroit"/>
     <EditText
         android:id="@+id/adrTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:layout_marginTop="26dp"
-        android:layout_below="@+id/nomTxt"
-        android:layout_alignStart="@+id/nomTxt" />
-
-    <Button
-        android:id="@+id/captureBtn"
+        android:ems="10"
+        android:hint="Adresse"/>
+    <Spinner
+        android:id="@+id/tagTxt"
+        android:layout_width="223dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginTop="26dp"/>
+    <LinearLayout
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="63dp"
-        android:text="Capturer"
-        android:layout_below="@+id/tagTxt"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="75dp">
+        <ImageView
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:id="@+id/captureIcon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/cerclebackgroundgreen"
+            android:src="@drawable/ic_photo_camera_black_24dp"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+</LinearLayout>

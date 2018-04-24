@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -53,6 +54,7 @@ public class Carte extends AppCompatActivity implements OnMapReadyCallback {
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     private EditText mSearchText;
+    private CardView mSearchBtn;
 
     private ImageView mGps;
 
@@ -64,6 +66,7 @@ public class Carte extends AppCompatActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_carte);
 
         mSearchText = (EditText) findViewById(R.id.input_search);
+        mSearchBtn = (CardView) findViewById(R.id.btnSearch);
         mGps = (ImageView) findViewById(R.id.ic_gps);
 
         getLocationPermission();
@@ -109,19 +112,10 @@ public class Carte extends AppCompatActivity implements OnMapReadyCallback {
     private void init(){
         Log.d(TAG, "init: initializing");
 
-        mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH
-                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
-                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
-
-                    //execute our method for searching
-                    geoLocate();
-                }
-
-                return false;
+            public void onClick(View v) {
+                geoLocate();
             }
         });
 

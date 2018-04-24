@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -64,8 +65,7 @@ public class AjoutEndroit extends AppCompatActivity {
     private Spinner tag;
     private String tagSelected = "";
 
-    private Button capturer;
-    private Button save;
+    private ImageView capturer;
 
     private ProgressDialog mProgressDialog;
 
@@ -109,7 +109,7 @@ public class AjoutEndroit extends AppCompatActivity {
         myRef = database.getReferenceFromUrl("https://miniprojetandroid-3f944.firebaseio.com/");
         cmpRef = database.getReference("cmp");
 
-        capturer = (Button)findViewById(R.id.captureBtn);
+        capturer = (ImageView) findViewById(R.id.captureIcon);
 
         mProgressDialog = new ProgressDialog(this);
 
