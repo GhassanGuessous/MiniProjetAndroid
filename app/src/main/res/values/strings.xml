@@ -1,21 +1,23 @@
 <resources>
-    <string name="app_name">MiniProjetAndroid</string>
+    <string name="app_name">SafiLoc</string>
     <string name="facebook_application_id">213588685892600</string>
     <string name="fb_login_protocol_scheme">fb213588685892600</string>
     <string name="title_activity_maps">Map</string>
     <string name="google_map_api_key">AIzaSyAXP0ZKfOY2G6TVCysOGHV40VmOY3yMeTo</string>
 
-    <string-array name="quartiers">
-        <item>Wad El Bacha</item>
-        <item>Miftah El Khair</item>
-        <item>Jnane EChakouri</item>
-        <item>Sidi Bouzid</item>
-        <item>Hay Assalam</item>
-        <item>Biyada</item>
-        <item>Hay Anas</item>
-        <item>Essania</item>
-    </string-array>
     <string-array name="tags">
+        <item>Tout</item>
+        <item>Café</item>
+        <item>Salle de jeux</item>
+        <item>Hammam</item>
+        <item>Terrain de foot</item>
+        <item>Pharmacie</item>
+        <item>Résidence</item>
+        <item>Salle de sport</item>
+        <item>Snack</item>
+    </string-array>
+    <string-array name="tagsAjout">
+        <item>Tags</item>
         <item>Café</item>
         <item>Salle de jeux</item>
         <item>Hammam</item>

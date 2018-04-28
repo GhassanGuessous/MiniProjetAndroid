@@ -230,7 +230,7 @@ public class AjoutEndroit extends AppCompatActivity {
             return false;
         else if(adr.getText().equals(""))
             return false;
-        else if(tagSelected.equals(""))
+        else if(tagSelected.equals("Tags"))
             return false;
         else
             return true;
@@ -250,7 +250,7 @@ public class AjoutEndroit extends AppCompatActivity {
             }
         });
         ArrayAdapter<CharSequence> tagsAdapter = ArrayAdapter.createFromResource(this,
-                R.array.tags, android.R.layout.simple_spinner_item);
+                R.array.tagsAjout, android.R.layout.simple_spinner_item);
 
         tagsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 

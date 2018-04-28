@@ -42,6 +42,7 @@ public class InfoEndroit extends AppCompatActivity {
     private FirebaseDatabase database;
     private FirebaseStorage storage;
     private DatabaseReference myRef;
+    private DatabaseReference myRefRating;
     private DatabaseReference cmpRefComment;
 
     private double lat;
@@ -56,6 +57,7 @@ public class InfoEndroit extends AppCompatActivity {
     private String idEndroit;
     private CardView commentAction;
     private RatingBar mRatingBar;
+    private int rating = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,10 +113,23 @@ public class InfoEndroit extends AppCompatActivity {
         mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                Toast.makeText(InfoEndroit.this, "your rating is : "  + (int)rating + "/5", Toast.LENGTH_SHORT).show();
+                Toast.makeText(InfoEndroit.this, "votre notation : "  + (int)rating + "/5", Toast.LENGTH_SHORT).show();
+                myRefRating.setValue(rating);
             }
         });
 
+        myRefRating.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() != null)
+                    mRatingBar.setRating(dataSnapshot.getValue(Integer.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void reInitComponents() {
@@ -132,6 +147,7 @@ public class InfoEndroit extends AppCompatActivity {
 
         mFireBase = FirebaseDatabase.getInstance();
         myRef = mFireBase.getReferenceFromUrl("https://miniprojetandroid-3f944.firebaseio.com/Comments/" + idEndroit + "/");
+        myRefRating = mFireBase.getReferenceFromUrl("https://miniprojetandroid-3f944.firebaseio.com/Rating/" + idEndroit + "/" + FirebaseAuth.getInstance().getCurrentUser().getUid());
     }
 
     public void setListAdapter(DatabaseReference ref){

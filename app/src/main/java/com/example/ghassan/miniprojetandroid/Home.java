@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class Home extends AppCompatActivity {
 
@@ -24,6 +25,8 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("pushNotifications");
 
         add = (CardView)findViewById(R.id.btnAdd);
         list = (CardView)findViewById(R.id.btnList);

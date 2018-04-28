@@ -51,8 +51,12 @@ public class ListeEndroits extends AppCompatActivity{
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Query query = myRef.orderByChild("tag").equalTo(tag);
-                setListAdapter2(query);
+                if(!tag.equals("Tout")) {
+                    Query query = myRef.orderByChild("tag").equalTo(tag);
+                    setListAdapter2(query);
+                }else{
+                    setListAdapter1(myRef);
+                }
             }
         });
 
